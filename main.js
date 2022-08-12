@@ -1,4 +1,5 @@
 getMovies()
+returnButton()
 
 function getMovies(){
     let btn = document.querySelector('.newbutton');
@@ -16,31 +17,21 @@ function getUserData(data){
    for (let i = 0; i < data.length; i++) {
     const element = data[i];
     makeDivs(element)
-    grabImages(element)
-    grabMovieInfo(element)
-    // getCharacters(element)
+    
    } 
-    
-    
-    
 }
 
  function makeDivs(element) {
     var movieTitle = element.title;
-     var characters = element.people;
-     var directors = element.director;
-     var id = element.id;
-      
+    var id = element.id;
+    
     
     var mainContainer = document.createElement('h2');
     mainContainer.className = 'location-container'
     mainContainer.id = id;
     
-    // mainContainer.addEventListener('click', function(){
-    //     console.log(mainContainer.id);
-    // })
-    mainContainer.append((`Movie: ${movieTitle}`) + " " + (`Director: ${directors} `));
     
+    mainContainer.append(`Movie: ${movieTitle} `)
     container.append(mainContainer);
     mainContainer.addEventListener('click', getCharacters)
  }
@@ -49,46 +40,78 @@ function getUserData(data){
     var img = document.createElement('img')
     var images = element.image;
     img.src = images;
-    container.append(img)
+    var imageContainer = document.createElement('div')
+    imageContainer.id = 'image-container'
+    imageContainer.append(img);
+    container.append(imageContainer)
     
  }
 
- function grabMovieInfo(element){
-    var description = element.description;
-    var releaseDate = element["release_date"]
-    var secondContainer = document.createElement('p');
-    secondContainer.className = 'para-container'
-    secondContainer.innerText =  "Release date: " + releaseDate + ' Description:' + " " + description;
-    // secondContainer.classList("flexContainer")
 
+  function getCharacters(e){
+    $.get(`https://ghibliapi.herokuapp.com/films/${e.target.id}`, grabCharacters)
+ }
+
+ function grabCharacters(obj){
+    $('.location-container').hide();
+   
+    //Images 
+    var images = obj.image;
+    var img = document.createElement('img')
+    img.src = images;
+    
+    //Dercription of the movie
+    var description = obj.description;
+    var descriptionContainer = document.createElement('div')
+    descriptionContainer.id = 'decription'
+    descriptionContainer.append(`Description: ${description}`);
+
+    //Director of the movie
+    var director = obj.director;
+    var directorContainer = document.createElement('div')
+    directorContainer.id = 'director'
+    directorContainer.append(`Director: ${director}`);
+   
+   //Release date of the movie  
+    var releaseDate = obj["release_date"];
+    var releasedateContainer = document.createElement('div')
+    releasedateContainer.id = 'releaseDate'
+    releasedateContainer.append(`ReleaseDate: ${releaseDate}`);
+    
+    var imageContainer = document.createElement('div')
+    imageContainer.id = 'image-container'
+    imageContainer.append(img);
   
-    container.append(secondContainer);
- }
-
-
-  function getCharacters(){
-    $.get('https://ghibliapi.herokuapp.com/people', grabCharacters)
- }
-
- function grabCharacters(data){
-    for (let i = 0; i < data.length; i++) {
-        const ele = data[i];
-        character(ele)
-       }
+    $('#image-container').show();
+    $('#director').show();
+    $('#releaseDate').show();
+    
+    container.append(imageContainer);
+    container.append(directorContainer);
+    container.append(releasedateContainer);
+    container.append(descriptionContainer);
 }
 
-function character(ele){
-   // var character = ele.name;
-   $('.container').hide();
-    var characterContainer = document.createElement('div');
-    characterContainer.className = 'chara-container'
-   $('.characontainer').show();
-    var character = ele.name
-    characterContainer.append(character)
-    characontainer.append(characterContainer);
-    //container.append(characterContainer)
-}
 
+
+function returnButton() {
+      
+    
+    let returnButton = document.querySelector('.returnButton');
+    
+    returnButton.addEventListener('click', function(){
+        
+         $('.location-container').show();
+         $('#container').show();
+         $('#image-container').remove();
+         $('#director').remove();
+         $('#releaseDate').remove();
+         $('#decription').remove();
+        
+         
+    })
+    
+    }
 
 
 

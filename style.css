@@ -28,16 +28,46 @@ h2 {
 }
 
 
-.para-container { 
-    color: rgb(0, 0, 0);
+#decription { 
+    color: rgb(30, 229, 4);
+    background-color: #333;
     font-weight: bold;
+    font-family: 'Rubik Dirt', cursive;
     text-align: center;
     font-size: large;
     font-style: italic;
     margin: auto;
-    width: 350px;
+    width: 450px;
+    
    
 }
+
+#releaseDate{
+    color: rgb(8, 238, 242);
+    background-color: #333;
+    font-weight: bold;
+    font-family: 'Rubik Dirt', cursive;
+    text-align: center;
+    font-size: large;
+    font-style: italic;
+    margin: auto;
+    width: 450px;
+    
+}
+#director{
+    color: rgb(240, 182, 23);
+    background-color: #333;
+    font-weight: bold;
+    font-family: 'Rubik Dirt', cursive;
+    text-align: center;
+    font-size: large;
+    font-style: italic;
+    margin: auto;
+    width: 450px;
+
+}
+
+
 
 img { 
 margin-right: auto;    
@@ -58,6 +88,17 @@ padding: 15px;
     background-color: #04AA6D;
     
 } 
+
+.returnButton{
+    
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    background-color: #04AA6D;
+}
 
 
 button:hover {
